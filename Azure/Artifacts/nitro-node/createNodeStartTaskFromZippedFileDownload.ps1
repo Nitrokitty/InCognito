@@ -18,6 +18,8 @@ param(
 $ErrorActionPreference = "Stop"
 $ZippedFileName = "ZippedSetupItems"
 $FirewallRuleName = "SeleniumNodePort"
+
+
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 function Unzip
@@ -85,7 +87,12 @@ $configFilePath = [string]($OutDirectoryPath + "\" + ((Get-Item "$OutDirectoryPa
 Write-Host "$configFilePath`n`tJar File: " -NoNewLine
 $jarFilePath = [string]($OutDirectoryPath + "\" + ((Get-Item "$OutDirectoryPath\*").Name | Where-Object {$_ -like "*selenium-server*"}))
 Write-Host "$jarFilePath`n`tJava Path: " -NoNewLine
-$javaPath = [string](Get-Command java).Definition
+
+if(Test-Path "C:\Program Files\Java"){
+	$javaPath =  "C:\Program Files\Java\" + ([string](Get-ChildItem -Path "C:\Program Files\Java\").Name) + "\bin\java.exe"
+} else {
+	$javaPath = [string](Get-Command java).Definition
+}
 
 $HubURL = "${hubUrl}:$HubPort/grid/register"
 Write-Host "$javaPath`n`tHub URL: $HubURL"
