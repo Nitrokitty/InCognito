@@ -35,9 +35,19 @@
             "type": "string",
             "displayName": "Node Port",
             "description": "The port that the node should use for general selenium traffic. Make sure this matches the port in your node configuration file"            
+        },
+		"UserName": {
+            "type": "string",
+            "displayName": "Username",
+            "description": "The domain and username pair used to login to the computer"            
+        },
+		"Password": {
+            "type": "string",
+            "displayName": "Password",
+            "description": "The password used to login to the computer"            
         }
     },
     "runCommand": {
-        "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted \"& ./createNodeStartTaskFromZippedFileDownload.ps1 -ZippedFileURL ', parameters('ZippedFileURL'), ' -OutDirectoryPath ', parameters('OutDirectoryPath'), ' -HubURL ', parameters('HubURL'), ' -HubPort ', parameters('HubPort'), ' -NodePort ', parameters('NodePort'), '\"')]"
+        "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted \"& ./createNodeStartTaskFromZippedFileDownload.ps1 -ZippedFileURL ', parameters('ZippedFileURL'), ' -OutDirectoryPath ', parameters('OutDirectoryPath'), ' -HubURL ', parameters('HubURL'), ' -HubPort ', parameters('HubPort'), ' -NodePort ', parameters('NodePort'), ' -UserName ', parameters('UserName'), ' -Password ', parameters('Password'), '\"')]"
     }
 }

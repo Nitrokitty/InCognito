@@ -12,7 +12,13 @@ param(
 	$HubPort,
 	
 	[int]
-	$NodePort
+	$NodePort,
+	
+	[string]
+	$UserName,
+	
+	[string]
+	$Password
 )
 
 $ErrorActionPreference = "Stop"
@@ -46,13 +52,19 @@ function CreateTask
 		$TaskName,
 		
 		[string]
-		$TaskDescription
+		$TaskDescription,
+		
+		[string]
+		$UserName,
+		
+		[string]
+		$Password
 
 	)
 
 	$action = New-ScheduledTaskAction -Execute $CommandPath
 	$trigger = New-ScheduledTaskTrigger -AtStartup
-	Register-ScheduledTask -Action $action -Trigger $trigger -TaskName $TaskName -Description $TaskDescription
+	Register-ScheduledTask -Action $action -Trigger $trigger -TaskName $TaskName -Description $TaskDescription -User $UserName -Password $Password
 }
 	
 if(Test-Path $OutDirectoryPath){
@@ -106,7 +118,7 @@ $startCMDPath = "$OutDirectoryPath\node-start.cmd"
 Write-Host "Creating Startup Task"
 $temp = New-Item $startCMDPath -type file -value $arguments
 
-$temp = CreateTask -CommandPath $startCMDPath -TaskName "StartNode" -TaskDescription "Start Selenium Node Service"
+$temp = CreateTask -CommandPath $startCMDPath -TaskName "StartNode" -TaskDescription "Start Selenium Node Service" -UserName $UserName -Password $Password
 
 Write-Host "Fin"
 
