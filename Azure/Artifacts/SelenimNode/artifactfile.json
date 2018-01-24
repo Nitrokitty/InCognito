@@ -2,6 +2,7 @@
     "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
     "title": "SeleniumNodeZipSetup",
     "description": "Use this artifact to setup your selenium-grid node via a zipped folder and startup task. Java must be installed on target VM.",
+	"iconUri": "https://photoshoppngframesimagesquotes.files.wordpress.com/2012/09/edaaa-flower9.png",
     "publisher": "Nitrokitty",
     "tags": [
         "PowerShell",
