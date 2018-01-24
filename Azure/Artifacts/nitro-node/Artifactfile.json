@@ -19,7 +19,7 @@
             "type": "string",
             "displayName": "Out Directory Path",
             "description": "The path to the folder that will store the zipped items and startup command",
-			"defaultValue": "C:\Selenium"
+			"defaultValue": "C:\\Selenium"
         },
 		"HubURL": {
             "type": "string",
