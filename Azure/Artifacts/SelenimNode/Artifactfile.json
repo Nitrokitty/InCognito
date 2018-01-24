@@ -1,0 +1,43 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+    "title": "SeleniumNodeZipSetup",
+    "description": "Use this artifact to setup your selenium-grid node via a zipped folder and startup task. Java must be installed on target VM.",
+	"iconUri": "https://photoshoppngframesimagesquotes.files.wordpress.com/2012/09/edaaa-flower9.png",
+    "publisher": "Nitrokitty",
+    "tags": [
+        "PowerShell",
+        "Selenium"
+    ],    
+    "targetOsType": "Windows",
+    "parameters": {
+        "ZippedFileURL": {
+            "type": "string",
+            "displayName": "Zipped File Url",
+            "description": "The url that contains all of the items for your selenium node. The contents of the zipped file must have at least the selenium grid jar file (the name of the file must contain 'selenium-server') and a node configuration file (must contain 'config'). It is suggested to add any necessary drivers"
+        },
+        "OutDirectoryPath": {
+            "type": "string",
+            "displayName": "Out Directory Path",
+            "description": "The path to the folder that will store the zipped items and startup command",
+			"defaultValue": "C:\Selenium"
+        },
+		"HubURL": {
+            "type": "string",
+            "displayName": "Hub URL",
+            "description": "The URL of the hub. Must start with https or http and should not end with a '/' or ':'."
+        },
+		"HubPort": {
+            "type": "string",
+            "displayName": "Hub Port",
+            "description": "The port that the node should use to connect to register grid"            
+        },
+		"NodePort": {
+            "type": "string",
+            "displayName": "Node Port",
+            "description": "The port that the node should use for general selenium traffic. Make sure this matches the port in your node configuration file"            
+        }
+    },
+    "runCommand": {
+        "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted \"& ./createNodeStartTaskFromZippedFileDownload.ps1 -ZippedFileURL ', parameters('ZippedFileURL'), ' -OutDirectoryPath ', parameters('OutDirectoryPath'), ' -HubURL ', parameters('HubURL'), ' -HubPort ', parameters('HubPort'), ' -NodePort ', parameters('NodePort'), '\"')]"
+    }
+}
