@@ -18,7 +18,10 @@ param(
 	$UserName,
 	
 	[string]
-	$Password
+	$Password,
+	
+	[switch]
+	$StartGridNow = $false
 )
 
 $ErrorActionPreference = "Stop"
@@ -56,10 +59,9 @@ function CreateTask
 		
 		[string]
 		$UserName,
-		
+	
 		[string]
 		$Password
-
 	)
 
 	$action = New-ScheduledTaskAction -Execute $CommandPath
@@ -119,6 +121,12 @@ Write-Host "Creating Startup Task"
 $temp = New-Item $startCMDPath -type file -value $arguments
 
 $temp = CreateTask -CommandPath $startCMDPath -TaskName "StartNode" -TaskDescription "Start Selenium Node Service" -UserName $UserName -Password $Password
+
+if($StartGridNow) {
+	Write-Host "Starting Node"
+	$temp = "/c $startCMDPath"
+	Start-Process cmd.exe -ArgumentList $temp
+}
 
 Write-Host "Fin"
 
