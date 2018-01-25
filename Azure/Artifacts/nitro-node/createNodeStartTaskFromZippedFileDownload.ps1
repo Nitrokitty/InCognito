@@ -66,7 +66,7 @@ function CreateTask
 
 	$action = New-ScheduledTaskAction -Execute $CommandPath
 	$trigger = New-ScheduledTaskTrigger -AtStartup
-	Register-ScheduledTask -Action $action -Trigger $trigger -TaskName $TaskName -Description $TaskDescription -User $UserName -Password $Password
+	Register-ScheduledTask -Action $action -Trigger $trigger -TaskName $TaskName -Description $TaskDescription -User $UserName
 }
 	
 if(Test-Path $OutDirectoryPath){
